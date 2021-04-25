@@ -1,8 +1,7 @@
 import turtle
 from player import Player
 from block import Block
-
-START_PLAYER_POSITION = (0, -250)
+from ball import Ball
 
 # setup the main screen
 screen = turtle.Screen()
@@ -10,12 +9,10 @@ screen.setup(width=800, height=600)
 screen.title("Breakout")
 
 # setup the player bar
-player = Player(START_PLAYER_POSITION)
+player = Player()
 
 # setup the ball
-ball = turtle.Turtle()
-ball.shape("circle")
-ball.color("green")
+ball = Ball()
 
 blocks = []
 #setup the blocks to destroy
@@ -28,5 +25,13 @@ for b in range(10):
 screen.listen()
 screen.onkeypress(player.go_left,"Left")
 screen.onkeypress(player.go_right,"Right")
+
+game_is_on = True
+while game_is_on:
+    screen.update()
+    ball.move_ball()
+    #Detect collision with player
+    if ball.distance(player) < 15:
+        ball.bounce_ball()
 
 screen.exitonclick()
