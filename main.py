@@ -34,4 +34,10 @@ while game_is_on:
     if ball.distance(player) < 15:
         ball.bounce_ball()
 
+    #Detect collision with blocks
+    for block in blocks:
+        if ball.distance(block) < 20:
+            print(block)
+            
+
 screen.exitonclick()
